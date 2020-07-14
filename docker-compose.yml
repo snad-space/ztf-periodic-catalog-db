@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  catalog-sql:
+    build: ./sql/
+    environment:
+      - POSTGRES_USER=catalog
+      - POSTGRES_PASSWORD=catalog
+    volumes:
+      - catalog-sql-data:/var/run/postgresql
+    networks:
+      - app
+    restart: always
+
+  ztf-periodic-catalog:
+    build: ./app/
+    networks:
+      - app
+      - proxy
+    depends_on:
+      - catalog-sql
+    environment:
+       VIRTUAL_HOST: periodic.ztf.snad.space
+       HTTPS_METHOD: noredirect
+       DYNDNS_HOST: periodic.ztf.snad.space
+       LETSENCRYPT_HOST: periodic.ztf.snad.space
+       LETSENCRYPT_EMAIL: ztf@homb.it
+    restart: always
+
+volumes:
+  catalog-sql-data:
+
+networks:
+  app:
+  proxy:
+    external:
+      name: proxy
