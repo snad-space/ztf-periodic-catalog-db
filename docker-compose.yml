@@ -24,7 +24,7 @@ services:
        HTTPS_METHOD: noredirect
        DYNDNS_HOST: periodic.ztf.snad.space
        LETSENCRYPT_HOST: periodic.ztf.snad.space
-       LETSENCRYPT_EMAIL: ztf@homb.it
+       LETSENCRYPT_EMAIL: letsencrypt@snad.space
     restart: always
 
 volumes:
