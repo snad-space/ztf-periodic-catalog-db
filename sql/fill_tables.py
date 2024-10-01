@@ -6,7 +6,7 @@ import pandas as pd
 import sqlalchemy
 
 
-ENGINE = sqlalchemy.create_engine(sqlalchemy.engine.url.URL(
+ENGINE = sqlalchemy.create_engine(sqlalchemy.engine.url.URL.create(
     drivername='postgresql+psycopg2',
     username='catalog',
     password='catalog',

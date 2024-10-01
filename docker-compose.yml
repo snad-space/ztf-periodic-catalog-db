@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   catalog-sql:
     build: ./sql/
@@ -33,5 +31,4 @@ volumes:
 networks:
   app:
   proxy:
-    external:
-      name: proxy
+    external: true

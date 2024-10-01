@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-import psycopg2
+import logging
 from time import sleep
+
+import psycopg2
 
 
 while True:
@@ -10,8 +12,8 @@ while True:
             with con.cursor() as cur:
                 cur.execute('SELECT * FROM table6 LIMIT 0')
         break
-    except psycopg2.OperationalError:
+    except (psycopg2.OperationalError, psycopg2.errors.UndefinedTable):
+        logging.info('Postgres is not available yet')
         sleep(1)
-        pass
 
-print('POSTGRES IS AVAILABLE')
+logging.warning('POSTGRES IS AVAILABLE')
